@@ -100,6 +100,10 @@
     <Compile Include="View\Users\VisitorView.xaml.cs">
       <DependentUpon>VisitorView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Styles\MenuElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AuthView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,9 +206,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Model\DataBase\BasicModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -216,6 +218,15 @@
       <DependentUpon>BasicModel.edmx</DependentUpon>
       <LastGenOutput>BasicModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\navigation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\resize.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\shut_down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

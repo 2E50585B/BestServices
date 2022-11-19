@@ -16,8 +16,8 @@ namespace BestServices.Model
 			FirstName = user.First_Name;
 			LastName = user.Last_Name;
 			Patronymic = user.Patronymic;
-			Role = user.Roles.Role;
-			SelectedServices = user.SelectedServices;
+			Role = (Roles.RoleType)user.RoleID;
+			SelectedServices = new List<SelectedServices>(user.SelectedServices);
 		}
 
 		public int ID { get; private set; }

@@ -12,7 +12,7 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                
+                <ResourceDictionary Source="/Resources/Styles/MenuElements.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type VM:HomeVM}">

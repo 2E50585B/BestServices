@@ -19,8 +19,8 @@ namespace BestServices.Model.DataBase
 
         public enum RoleType
         {
-            Гость = 1,
-            Менеджер_услуг
+            Менеджер_услуг = 1,
+            Гость
         }
     }
 }

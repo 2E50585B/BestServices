@@ -36,16 +36,7 @@ namespace BestServices.ViewModel
             }
         }
 
-        private string _password;
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Password { private get; set; }
 
         private void Authorization()
         {
@@ -54,28 +45,30 @@ namespace BestServices.ViewModel
                 User = Select.SelectUser(_login);
             }
 
-            if (User != null)
+            if (User.ID != 0)
             {
-                if (User.Password == _password)
+                if (User.Password == Password)
                 {
-                    if (User.Roles.Role == Roles.RoleType.Гость)
+                    if (User.RoleID == (int)Roles.RoleType.Гость)
                     {
                         App.Messenger.Send(new SetCurrentView(new VisitorVM(User)));
                     }
-                    else if (User.Roles.Role == Roles.RoleType.Менеджер_услуг)
+                    else if (User.RoleID == (int)Roles.RoleType.Менеджер_услуг)
                     {
                         App.Messenger.Send(new SetCurrentView(new ServiceManagerVM(User)));
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Не верный пароль \"{_password}\"");
+                    MessageBox.Show($"Не верный пароль");
                 }
             }
             else
             {
                 MessageBox.Show($"Пользователь \"{_login}\" не найден");
             }
+
+            IsDirtyLogin = false;
         }
     }
 }

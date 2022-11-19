@@ -6,15 +6,108 @@
         xmlns:local="clr-namespace:BestServices.View"
         xmlns:viewModel="clr-namespace:BestServices.ViewModel"
         mc:Ignorable="d"
-        Title="{Binding CurrentView.Title, TargetNullValue=NULLREFERENCE_TITLE}"
-        Height="450"
-        Width="800">
+        Title="{Binding CurrentView.Title, TargetNullValue=BestServices}"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Height="680"
+        Width="1024"
+        MinWidth="600">
 
     <Window.DataContext>
         <viewModel:MainVM/>
     </Window.DataContext>
 
-    <Grid>
+    <Window.InputBindings>
+        <KeyBinding Gesture="Alt+F10" Command="{Binding DefaultSize}"/>
+        <KeyBinding Gesture="Alt+F11" Command="{Binding Maximize}"/>
+        <KeyBinding Gesture="Alt+F12" Command="{Binding Minimize}"/>
+        
+        <KeyBinding Gesture="Ctrl+E" Command="{Binding Exit}"/>
+    </Window.InputBindings>
 
-    </Grid>
+    <Border CornerRadius="30 30 0 30"
+            Background="#272537">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Menu Margin="20 0 0 0"
+                      FontSize="20"
+                      VerticalAlignment="Center">
+
+                    <MenuItem Header="File">
+                        <MenuItem Header="Navigation">
+                            <MenuItem Header="Go Home"
+                                      Command="{Binding GoHome}"/>
+                            
+                            <MenuItem Header="Authorization"
+                                      Command="{Binding GoAuth}"/>
+                            
+                            <MenuItem Header="Registration"
+                                      Command="{Binding GoReg}"/>
+
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/Images/navigation.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Resize Window">
+                            <MenuItem Header="Default Size"
+                                      Command="{Binding DefaultSize}"
+                                      InputGestureText="Alt+F10"/>
+                            
+                            <MenuItem Header="Full Screen"
+                                      Command="{Binding Maximize}"
+                                      InputGestureText="Alt+F11"/>
+                            
+                            <MenuItem Header="Hide"
+                                      Command="{Binding Minimize}"
+                                      InputGestureText="Alt+F12"/>
+
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/Images/resize.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Exit"
+                                  Command="{Binding Exit}"
+                                  InputGestureText="Ctrl+E">
+
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/Images/shut_down.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
+                <TextBlock Grid.Column="1"
+                           Text="{Binding CurrentView.Title, TargetNullValue=NULLREFERENCE_TITLE}"
+                           FontSize="30"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextTrimming="CharacterEllipsis"/>
+            </Grid>
+
+            <ContentControl Margin="20"
+                            Grid.Row="1"
+                            Focusable="False"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
+    </Border>
 </Window>
