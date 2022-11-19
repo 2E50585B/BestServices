@@ -1,0 +1,40 @@
+﻿<Application x:Class="BestServices.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BestServices"
+             xmlns:view="clr-namespace:BestServices.View"
+             xmlns:usersView="clr-namespace:BestServices.View.Users"
+             xmlns:VM="clr-namespace:BestServices.ViewModel"
+             xmlns:usersVM="clr-namespace:BestServices.ViewModel.Users"
+             StartupUri="/View/MainView.xaml">
+
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type VM:HomeVM}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type VM:AuthVM}">
+                <view:AuthView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type VM:RegVM}">
+                <view:RegView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type usersVM:ServiceManagerVM}">
+                <usersView:ServiceManagerView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type usersVM:VisitorVM}">
+                <usersView:VisitorView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
