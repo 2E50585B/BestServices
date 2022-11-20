@@ -49,14 +49,16 @@ namespace BestServices.ViewModel
 
 			CurrentView = HomeVM;
 
-			GoHome = new RelayCommand(obj => CurrentView = HomeVM, obj => CurrentView != HomeVM);
-			GoAuth = new RelayCommand(obj => CurrentView = AuthVM, obj => CurrentView != AuthVM);
-			GoReg = new RelayCommand(obj => CurrentView = RegVM, obj => CurrentView != RegVM);
+			GoHome = new RelayCommand(obj => CurrentView = HomeVM, obj => !(CurrentView is HomeVM));
+			GoAuth = new RelayCommand(obj => CurrentView = AuthVM, obj => !(CurrentView is AuthVM));
+			GoReg = new RelayCommand(obj => CurrentView = RegVM, obj => !(CurrentView is RegVM));
 
 			DefaultSize = new RelayCommand(obj => Application.Current.MainWindow.WindowState = WindowState.Normal,
 				obj => Application.Current.MainWindow.WindowState != WindowState.Normal);
+
 			Maximize = new RelayCommand(obj => Application.Current.MainWindow.WindowState = WindowState.Maximized,
 				obj => Application.Current.MainWindow.WindowState != WindowState.Maximized);
+
 			Minimize = new RelayCommand(obj => Application.Current.MainWindow.WindowState = WindowState.Minimized,
 				obj => Application.Current.MainWindow.WindowState != WindowState.Minimized);
 

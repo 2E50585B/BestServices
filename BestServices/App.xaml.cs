@@ -7,6 +7,8 @@ namespace BestServices
 {
     public partial class App : Application
     {
+        internal static string ConnectionString { get; private set; }
+
 		private static IMessenger _messenger;
         internal static IMessenger Messenger
         {
@@ -21,12 +23,7 @@ namespace BestServices
             }
         }
 
-        internal static string ConnectionString { get; private set; }
-
-		public App()
-		{
-            ConnectionString = SetConnectionString();
-		}
+        public App() => ConnectionString = SetConnectionString();
 
 		private static string SetConnectionString()
 		{

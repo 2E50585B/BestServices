@@ -15,7 +15,8 @@
         Background="Transparent"
         Height="680"
         Width="1024"
-        MinWidth="600">
+        MinWidth="600"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.DataContext>
         <viewModel:MainVM/>

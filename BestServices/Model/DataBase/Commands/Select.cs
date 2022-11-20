@@ -96,5 +96,48 @@ namespace BestServices.Model.DataBase.Commands
 
             return services;
         }
+
+        public static ICollection<Roles> SelectRoles()
+        {
+            ICollection<Roles> roles = new List<Roles>();
+
+            using (SqlConnection connection = new SqlConnection(App.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandText = "select * from [Roles]"
+                    };
+
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    try
+                    {
+                        while (reader.Read())
+                        {
+                            roles.Add(new Roles()
+                            {
+                                ID = (int)reader["ID"],
+                                RoleName= (string)reader["RoleName"]
+                            });
+                        }
+                    }
+                    finally
+                    {
+                        reader.Close();
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return roles;
+        }
     }
 }

@@ -8,5 +8,10 @@ namespace BestServices.View
         {
             InitializeComponent();
         }
+
+        private void Password_PasswordChanged(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ((dynamic)DataContext).NewUser.Password = ((PasswordBox)sender).Password;
+        }
     }
 }

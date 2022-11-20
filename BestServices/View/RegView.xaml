@@ -3,12 +3,135 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:BestServices.ViewModel"
              xmlns:local="clr-namespace:BestServices.View"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
-    
-    <Grid>
 
-    </Grid>
+    <UserControl.DataContext>
+        <viewModel:RegVM/>
+    </UserControl.DataContext>
+
+    <Border CornerRadius="30"
+            Background="#22202f">
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height=".8*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width=".2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Target="{Binding ElementName=Login}">
+                    
+                    <AccessText Text="_Login:"/>
+                </Label>
+
+                <Label Grid.Row="1"
+                       Target="{Binding ElementName=Password}">
+
+                    <AccessText Text="_Password:"/>
+                </Label>
+
+                <Label Grid.Row="2"
+                       Target="{Binding ElementName=FName}">
+
+                    <AccessText Text="_First name:"/>
+                </Label>
+
+                <Label Grid.Row="3"
+                       Target="{Binding ElementName=LName}">
+
+                    <AccessText Text="_Last name:"/>
+                </Label>
+
+                <Label Grid.Row="4"
+                       Target="{Binding ElementName=Patronymic}">
+
+                    <AccessText Text="_Patronymic:"/>
+                </Label>
+
+                <Label Grid.Row="5"
+                       Target="{Binding ElementName=Role}">
+
+                    <AccessText Text="_Role:"/>
+                </Label>
+
+
+
+                <TextBox x:Name="Login"
+                         Grid.Column="1"
+                         Grid.Row="0"
+                         Text="{Binding NewUser.Login}"/>
+
+                <PasswordBox x:Name="Password"
+                             Grid.Column="1"
+                             Grid.Row="1"
+                             Password="Password"
+                             PasswordChanged="Password_PasswordChanged"/>
+
+                <TextBox x:Name="FName"
+                         Grid.Column="1"
+                         Grid.Row="2"
+                         Text="{Binding NewUser.FirstName}"/>
+                
+                <TextBox x:Name="LName"
+                         Grid.Column="1"
+                         Grid.Row="3"
+                         Text="{Binding NewUser.LastName}"/>
+                
+                <TextBox x:Name="Patronymic"
+                         Grid.Column="1"
+                         Grid.Row="4"
+                         Text="{Binding NewUser.Patronymic}"/>
+
+                <ComboBox x:Name="Role"
+                          Grid.Column="1"
+                          Grid.Row="5"
+                          DisplayMemberPath="RoleName"
+                          SelectedItem="{Binding SelectedRole}"
+                          ItemsSource="{Binding Roles}"/>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="80 20">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Button Content="Register"
+                        Command="{Binding SignUpCommand}"/>
+                
+                <Button Grid.Row="1"
+                        Margin="0 10"
+                        Content="I already have an account"
+                        Command="{Binding ReturnCommand}"/>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

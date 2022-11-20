@@ -1,13 +1,12 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
-using System.Windows;
 
 namespace BestServices.Model.DataBase.Commands
 {
     internal static class Insert
     {
-        public static void InsertUser(ref NewUser newUser)
+        public static bool InsertUser(ref NewUser newUser)
         {
             using (BestServicesEntities dataBase = new BestServicesEntities())
             {
@@ -43,6 +42,8 @@ namespace BestServices.Model.DataBase.Commands
                             connection.Open();
 
                             command.ExecuteNonQuery();
+
+                            return true;
                         }
                         finally
                         {
@@ -52,7 +53,7 @@ namespace BestServices.Model.DataBase.Commands
                 }
                 else
                 {
-                    MessageBox.Show($"Пользователь {login} уже существует");
+                    return false;
                 }
             }
         }

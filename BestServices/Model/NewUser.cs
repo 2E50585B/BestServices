@@ -33,16 +33,7 @@ namespace BestServices.Model
 			}
 		}
 
-		private string _password;
-		public string Password
-		{
-			get => _password;
-			set
-			{
-				_password = value;
-				OnPropertyChanged();
-			}
-		}
+		public string Password { get; set; }
 
 		private string _firstName;
 		public string FirstName
@@ -102,5 +93,7 @@ namespace BestServices.Model
 			}
 		}
 
-	}
+        public bool IsFieldsEmpty() => string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password) ||
+			string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || RoleID == 0;
+    }
 }

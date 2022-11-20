@@ -3,12 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:BestServices.ViewModel"
              xmlns:local="clr-namespace:BestServices.View"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
-    
-    <Grid>
 
-    </Grid>
+    <UserControl.DataContext>
+        <viewModel:HomeVM/>
+    </UserControl.DataContext>
+
+    <Border CornerRadius="30"
+            Background="#22202f">
+
+        <Grid Margin="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="#4e99ff"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="#4e99ff"/>
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border CornerRadius="10"
+                                        BorderBrush="{TemplateBinding Foreground}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}">
+
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="35"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Style>
+            </Grid.Resources>
+
+            <Button Content="Authorization"
+                    Margin="60 100 30 100"
+                    Command="{Binding GoAuth}"/>
+
+            <Button Content="Registration"
+                    Grid.Column="1"
+                    Margin="30 100 60 100"
+                    Command="{Binding GoReg}"/>
+        </Grid>
+    </Border>
 </UserControl>
