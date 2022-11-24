@@ -84,6 +84,8 @@
     <Compile Include="ViewModel\RegVM.cs" />
     <Compile Include="ViewModel\ServiceConstructorVM.cs" />
     <Compile Include="ViewModel\Users\ServiceManagerVM.cs" />
+    <Compile Include="ViewModel\Users\UserProfileVM.cs" />
+    <Compile Include="ViewModel\Users\UserServicesVM.cs" />
     <Compile Include="ViewModel\Users\VisitorVM.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -96,6 +98,12 @@
     </Compile>
     <Compile Include="View\Users\ServiceManagerView.xaml.cs">
       <DependentUpon>ServiceManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\UserProfile.xaml.cs">
+      <DependentUpon>UserProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Users\UserServices.xaml.cs">
+      <DependentUpon>UserServices.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Users\VisitorView.xaml.cs">
       <DependentUpon>VisitorView.xaml</DependentUpon>
@@ -171,6 +179,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Users\UserProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Users\UserServices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Users\VisitorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +238,12 @@
       <DependentUpon>BasicModel.edmx</DependentUpon>
       <LastGenOutput>BasicModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\services.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\profile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\navigation.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

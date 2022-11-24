@@ -2,6 +2,7 @@
 using BestServices.Model;
 using BestServices.Model.DataBase;
 using BestServices.Model.DataBase.Commands;
+using System;
 using System.Collections.Generic;
 
 namespace BestServices.ViewModel.Users
@@ -19,14 +20,29 @@ namespace BestServices.ViewModel.Users
 
         public ICollection<Services> Services { get; private set; }
 
+        public RelayCommand OpenProfile { get; private set; }
+        public RelayCommand OpenSelServices { get; private set; }
+
         public RelayCommand SelectService { get; private set; }
         public RelayCommand DeselectService { get; private set; }
+
+        public VisitorVM() { }
 
         public VisitorVM(Model.DataBase.Users user)
         {
             User = new NewUser(user);
 
             Services = Select.SelectServices();
+
+            OpenProfile = new RelayCommand(obj =>
+            {
+
+            });
+
+            OpenSelServices = new RelayCommand(obj =>
+            {
+
+            });
 
             SelectService = new RelayCommand(obj =>
             {
@@ -52,5 +68,17 @@ namespace BestServices.ViewModel.Users
                 }
             });
         }
+
+        private object _currentPage;
+        public object CurrentPage
+        {
+            get => _currentPage;
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
+
     }
 }
