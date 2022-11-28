@@ -1,10 +1,12 @@
-﻿using BestServices.Core;
+﻿using System.Collections.Generic;
+using BestServices.Core;
+using BestServices.Core.DialogService;
 using BestServices.Model;
 using BestServices.Model.DataBase;
 using BestServices.Model.DataBase.Commands;
 using BestServices.Model.Messages;
-using System.Collections.Generic;
-using System.Windows;
+using BestServices.View.Dialogs;
+using BestServices.ViewModel.Dialogs;
 
 namespace BestServices.ViewModel
 {
@@ -36,21 +38,24 @@ namespace BestServices.ViewModel
             {
                 if (!NewUser.IsFieldsEmpty())
                 {
-                    if (Insert.InsertUser(ref _newUser))
+                    if (Insert.InsertUser(_newUser))
                     {
-                        MessageBox.Show("Registration Completed Successfully!", "SUCCESS", MessageBoxButton.OK, MessageBoxImage.Information);
+                        App.ModalDialogService.ShowDialog(new SimpleNotification(),
+                            new SimpleNotificationVM("УСПЕХ", "Регистрация завершена успешно!"), DialogType.Notify);
                     }
                     else
                     {
-                        MessageBox.Show($"Registration Failed With En ERROR!\nThis Login Is Busy:\t{NewUser.Login}", "FAILURE",
-                            MessageBoxButton.OK, MessageBoxImage.Error);
+                        App.ModalDialogService.ShowDialog(new SimpleNotification(),
+                            new SimpleNotificationVM("НЕУДАЧА",
+                            $"Регистрация завершена с ошибкой!\nЭтот логин уже используется:\t{NewUser.Login}"), DialogType.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Not All Fields Are Filled In!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    App.ModalDialogService.ShowDialog(new SimpleNotification(),
+                        new SimpleNotificationVM("ОШИБКА", "Не все поля заполнены!"), DialogType.Error);
                 }
-            });
+            }, obj => !NewUser.HasErrors);
         }
 
         private Roles _selectedRole;
@@ -64,6 +69,5 @@ namespace BestServices.ViewModel
                 OnPropertyChanged();
             }
         }
-
     }
 }

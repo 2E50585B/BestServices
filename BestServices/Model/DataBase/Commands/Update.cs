@@ -3,9 +3,16 @@ using System.Data.SqlClient;
 
 namespace BestServices.Model.DataBase.Commands
 {
+    /// <summary>
+    /// Предоставляет методы для обновления значений в Базе Данных
+    /// </summary>
     internal static class Update
     {
-        public static void UpdateService(ref Services service)
+        /// <summary>
+        /// Обновляет информацию услуги <paramref name="service"/> в БД, произведя её поиск по идентификатору
+        /// </summary>
+        /// <param name="service">Обновлённая услуга</param>
+        public static void UpdateService(in Services service)
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {

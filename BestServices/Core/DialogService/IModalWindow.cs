@@ -2,12 +2,15 @@
 
 namespace BestServices.Core.DialogService
 {
+    /// <summary>
+    /// Определяет диалоговое окно
+    /// </summary>
     internal interface IModalWindow
     {
-        bool? DialogResult { get; set; }
-        event EventHandler Closed;
-        void Show();
-        object DataContext { get; set; }
-        void Close();
+        bool? Result { get; set; }
+        event EventHandler OnClose;
+        void ShowView();
+        object Data { get; set; }
+        void CloseView();
     }
 }

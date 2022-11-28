@@ -3,9 +3,17 @@ using System.Data.SqlClient;
 
 namespace BestServices.Model.DataBase.Commands
 {
+    /// <summary>
+    /// Предоставляет методы для выбора значений из Базы Данных
+    /// </summary>
     internal static class Select
     {
-        public static Users SelectUser(string login)
+        /// <summary>
+        /// Выбирает пользователя по логину <paramref name="login"/>
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <returns>Возвращает найденного пользователя</returns>
+        public static Users SelectUser(in string login)
         {
             Users user = new Users();
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
@@ -52,6 +60,10 @@ namespace BestServices.Model.DataBase.Commands
             }
         }
 
+        /// <summary>
+        /// Получает значения списка услуг из БД
+        /// </summary>
+        /// <returns>Возвращает коллекцию усуг</returns>
         public static ICollection<Services> SelectServices()
         {
             ICollection<Services> services = new List<Services>();
@@ -97,6 +109,10 @@ namespace BestServices.Model.DataBase.Commands
             return services;
         }
 
+        /// <summary>
+        /// Получает значения списка должностей из БД
+        /// </summary>
+        /// <returns>Возвращает коллекцию должностей</returns>
         public static ICollection<Roles> SelectRoles()
         {
             ICollection<Roles> roles = new List<Roles>();

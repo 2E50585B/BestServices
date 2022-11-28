@@ -36,7 +36,7 @@ namespace BestServices.ViewModel.Users
                 Services service = new Services();//service from DialogBoxVM
                 ServicesCollection.Add(service);
                 OnPropertyChanged("FilteredServices");
-                Insert.InsertService(ref service);
+                Insert.InsertService(service);
             });
 
             DeleteService = new RelayCommand(obj =>
@@ -45,7 +45,7 @@ namespace BestServices.ViewModel.Users
                 {
                     ServicesCollection.Remove(service);
                     OnPropertyChanged("FilteredServices");
-                    Remove.RemoveService(ref service);
+                    Remove.RemoveService(service);
                 }
             });
 
@@ -58,7 +58,7 @@ namespace BestServices.ViewModel.Users
                     ServicesCollection[ServicesCollection.IndexOf(service)] = newService;
                     ServicesCollection.Remove(service);
                     OnPropertyChanged("FilteredServices");
-                    Update.UpdateService(ref newService);
+                    Update.UpdateService(newService);
                 }
             });
         }

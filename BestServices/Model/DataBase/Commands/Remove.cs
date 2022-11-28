@@ -3,9 +3,16 @@ using System.Data.SqlClient;
 
 namespace BestServices.Model.DataBase.Commands
 {
+    /// <summary>
+    /// Предоставляет методы для удаления значений из Базы Данных
+    /// </summary>
     internal static class Remove
     {
-        public static void RemoveSelectedService(ref SelectedServices service)
+        /// <summary>
+        /// Удаляет выбранную услугу из соответствующего списка в БД
+        /// </summary>
+        /// <param name="service">Выбранная услуга</param>
+        public static void RemoveSelectedService(in SelectedServices service)
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {
@@ -27,7 +34,11 @@ namespace BestServices.Model.DataBase.Commands
             }
         }
 
-        public static void RemoveService(ref Services service)
+        /// <summary>
+        /// Удаляет услугу из списка услуг в БД
+        /// </summary>
+        /// <param name="service">Услуга</param>
+        public static void RemoveService(in Services service)
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {

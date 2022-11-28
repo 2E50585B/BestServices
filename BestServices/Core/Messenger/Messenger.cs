@@ -5,13 +5,28 @@ using System.Linq;
 
 namespace BestServices.Core.Messenger
 {
+    /// <summary>
+    /// Базовый класс, реализующий методы для <b>потокобезопасной</b> передачи сообщений
+    /// </summary>
     internal class Messenger : IMessenger
     {
+        /// <summary>
+        /// Потокобезопасная коллекция подписок
+        /// </summary>
         private ConcurrentDictionary<Type, SynchronizedCollection<Subscription>> Subscriptions =
             new ConcurrentDictionary<Type, SynchronizedCollection<Subscription>>();
 
+        /// <summary>
+        /// Потокобезопасная коллекция состояний сообщений
+        /// </summary>
         private ConcurrentDictionary<Type, object> CurrentState = new ConcurrentDictionary<Type, object>();
 
+        /// <summary>
+        /// Отправляет сообщение всем подписчикам
+        /// </summary>
+        /// <typeparam name="TMessage">Тип сообщения</typeparam>
+        /// <param name="message">Объект сообщения</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void Send<TMessage>(TMessage message)
         {
             if (message == null)
@@ -32,6 +47,12 @@ namespace BestServices.Core.Messenger
             }
         }
 
+        /// <summary>
+        /// Создаёт нового подписчика на определённое сообщение с действием, которое нужно выполнить при получении сообщения
+        /// </summary>
+        /// <typeparam name="TMessage">Тип сообщения</typeparam>
+        /// <param name="subscriber">Подписчик</param>
+        /// <param name="action">Действие на получение сообщения</param>
         public void Subscribe<TMessage>(object subscriber, Action<object> action)
         {
             if (!Subscriptions.ContainsKey(typeof(TMessage)))
@@ -49,6 +70,11 @@ namespace BestServices.Core.Messenger
             }
         }
 
+        /// <summary>
+        /// Отписывает подписчика от сообщения
+        /// </summary>
+        /// <typeparam name="TMessage">Тип сообщения</typeparam>
+        /// <param name="subscriber">Подписчик</param>
         public void Unsubscribe<TMessage>(object subscriber)
         {
             if (Subscriptions.ContainsKey(typeof(TMessage)))
@@ -61,11 +87,19 @@ namespace BestServices.Core.Messenger
             }
         }
 
+        /// <summary>
+        /// Класс подписки
+        /// </summary>
         private protected class Subscription
         {
             public object Subscriber { get; private set; }
             public Action<object> Action { get; private set; }
 
+            /// <summary>
+            /// Создаёт новый экземпляр подписки с подписчиком и действием
+            /// </summary>
+            /// <param name="subscriber">Подписчик</param>
+            /// <param name="action">Действие</param>
             public Subscription(object subscriber, Action<object> action)
             {
                 Subscriber = subscriber;

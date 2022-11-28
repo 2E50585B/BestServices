@@ -3,11 +3,19 @@ using System.Windows.Input;
 
 namespace BestServices.Core
 {
+	/// <summary>
+	/// Базовый класс для определения команды
+	/// </summary>
 	internal class RelayCommand : ICommand
 	{
 		private readonly Action<object> _execute;
 		private readonly Func<object, bool> _canExecute;
 
+		/// <summary>
+		/// Создаёт команду с действием <paramref name="execute"/> и свойством <paramref name="canExecute"/>
+		/// </summary>
+		/// <param name="execute">Действие, которое будет выполнять команда</param>
+		/// <param name="canExecute">Свойство, поределяющиее, может ли команда быть вызвана</param>
 		public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
 		{
 			_execute = execute;

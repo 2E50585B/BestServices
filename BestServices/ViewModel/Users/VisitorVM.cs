@@ -51,7 +51,7 @@ namespace BestServices.ViewModel.Users
                     if (!User.SelectedServices.Contains(service))
                     {
                         User.SelectedServices.Add(service);
-                        Insert.InsertSelectedService(ref _user);
+                        Insert.InsertSelectedService(_user);
                     }
                 }
             });
@@ -63,7 +63,7 @@ namespace BestServices.ViewModel.Users
                     if (User.SelectedServices.Contains(service))
                     {
                         User.SelectedServices.Remove(service);
-                        Remove.RemoveSelectedService(ref service);
+                        Remove.RemoveSelectedService(service);
                     }
                 }
             });

@@ -1,12 +1,22 @@
-﻿using System.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
+using System.Data.SqlClient;
+using BestServices.Model.Security;
 
 namespace BestServices.Model.DataBase.Commands
 {
+    /// <summary>
+    /// Предоставляет методы для вставки значений в Базу Данных
+    /// </summary>
     internal static class Insert
     {
-        public static bool InsertUser(ref NewUser newUser)
+        /// <summary>
+        /// Вставляет в БД нового пользователя
+        /// </summary>
+        /// <param name="newUser">новый пользователь</param>
+        /// <returns>Возвращает <see langword="true"/>, если удалось вставить нового пользователя
+        /// или <see langword="false"/>, если <paramref name="newUser"/> уже есть в БД</returns>
+        public static bool InsertUser(in NewUser newUser)
         {
             using (BestServicesEntities dataBase = new BestServicesEntities())
             {
@@ -33,7 +43,7 @@ namespace BestServices.Model.DataBase.Commands
                             command.Parameters.Add("@RoleID", SqlDbType.Int);
 
                             command.Parameters["@Login"].Value = login;
-                            command.Parameters["@Password"].Value = newUser.Password;
+                            command.Parameters["@Password"].Value = newUser.Password.ToUnsecuredString();
                             command.Parameters["@FirstName"].Value = newUser.FirstName;
                             command.Parameters["@LastName"].Value = newUser.LastName;
                             command.Parameters["@Patronymic"].Value = newUser.Patronymic;
@@ -58,7 +68,11 @@ namespace BestServices.Model.DataBase.Commands
             }
         }
 
-        public static void InsertSelectedService(ref NewUser newUser)
+        /// <summary>
+        ///  Вставляет в БД новую выбранную услугу пользователя <paramref name="user"/>
+        /// </summary>
+        /// <param name="user">Пользователь, выбравший нову услугу</param>
+        public static void InsertSelectedService(in NewUser user)
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {
@@ -71,8 +85,8 @@ namespace BestServices.Model.DataBase.Commands
                 command.Parameters.Add("@UserID", SqlDbType.Int);
                 command.Parameters.Add("@ServiceID", SqlDbType.Int);
 
-                command.Parameters["@UserID"].Value = newUser.ID;
-                command.Parameters["@ServiceID"].Value = newUser.SelectedServices.Last().ServiceID;
+                command.Parameters["@UserID"].Value = user.ID;
+                command.Parameters["@ServiceID"].Value = user.SelectedServices.Last().ServiceID;
 
                 connection.Open();
 
@@ -82,7 +96,11 @@ namespace BestServices.Model.DataBase.Commands
             }
         }
 
-        public static void InsertService(ref Services service)
+        /// <summary>
+        /// Вставляет в список услуг в БД новую услугу
+        /// </summary>
+        /// <param name="service">Новая услуга</param>
+        public static void InsertService(in Services service)
         {
             using (SqlConnection connection = new SqlConnection(App.ConnectionString))
             {

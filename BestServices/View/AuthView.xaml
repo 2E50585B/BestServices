@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:BestServices.ViewModel"
              xmlns:local="clr-namespace:BestServices.View"
+             xmlns:security="clr-namespace:BestServices.Model.Security"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
@@ -50,8 +51,9 @@
                         <AccessText Text="_Login:"/>
                     </Label>
                     <TextBox x:Name="login"
-                             Text="{Binding Login}"
-                             FontSize="20"/>
+                             Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="20"
+                             MaxLength="20"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1">
@@ -60,7 +62,8 @@
                     </Label>
                     <PasswordBox x:Name="password"
                                  FontSize="20"
-                                 PasswordChanged="PasswordBox_PasswordChanged"/>
+                                 MaxLength="20"
+                                 security:PasswordBoxHelper.SecurePassword="{Binding Password, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2"

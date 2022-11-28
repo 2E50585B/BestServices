@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -78,7 +80,12 @@
     <Compile Include="Model\DataBase\PartialRoles.cs" />
     <Compile Include="Model\Messages\SetCurrentView.cs" />
     <Compile Include="Model\NewUser.cs" />
+    <Compile Include="Model\Security\PasswordBindingMarshaller.cs" />
+    <Compile Include="Model\Security\PasswordBoxHelper.cs" />
+    <Compile Include="Model\Security\RequiredSecureStringAttribute.cs" />
+    <Compile Include="Model\Security\SecureStringExtentions.cs" />
     <Compile Include="ViewModel\AuthVM.cs" />
+    <Compile Include="ViewModel\Dialogs\SimpleNotificationVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\RegVM.cs" />
@@ -87,6 +94,9 @@
     <Compile Include="ViewModel\Users\UserProfileVM.cs" />
     <Compile Include="ViewModel\Users\UserServicesVM.cs" />
     <Compile Include="ViewModel\Users\VisitorVM.cs" />
+    <Compile Include="View\Dialogs\SimpleNotification.xaml.cs">
+      <DependentUpon>SimpleNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -112,11 +122,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Styles\ModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\RegElements.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AuthView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialogs\SimpleNotification.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

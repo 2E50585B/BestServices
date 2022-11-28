@@ -2,6 +2,9 @@
 
 namespace BestServices.Core.Messenger
 {
+    /// <summary>
+    /// Определяет базовые методы для реализации передачи сообщений
+    /// </summary>
     internal interface IMessenger
     {
         void Send<TMessage>(TMessage message);

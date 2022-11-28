@@ -1,4 +1,5 @@
-﻿using BestServices.Core.Messenger;
+﻿using BestServices.Core.DialogService;
+using BestServices.Core.Messenger;
 using System.Configuration;
 using System.Data.Entity.Core.EntityClient;
 using System.Windows;
@@ -20,6 +21,20 @@ namespace BestServices
                 }
 
                 return _messenger;
+            }
+        }
+
+        private static IModalDialogService _modalDialogService;
+        internal static IModalDialogService ModalDialogService
+        {
+            get
+            {
+                if (_modalDialogService == null)
+                {
+                    _modalDialogService = new ModalDialogService();
+                }
+
+                return _modalDialogService;
             }
         }
 

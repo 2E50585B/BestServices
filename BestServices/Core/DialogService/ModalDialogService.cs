@@ -1,24 +1,57 @@
 ﻿using System;
+using System.Media;
 
 namespace BestServices.Core.DialogService
 {
+    /// <summary>
+    /// Базовый класс, реализующий методы для отображения диалоговых окон
+    /// </summary>
     internal class ModalDialogService : IModalDialogService
     {
-        public void ShowDialog<TViewModel>(IModalWindow view, TViewModel viewModel, Action<TViewModel> onDialogClose)
+        /// <summary>
+        /// Вызов диалогового окна с действием при его закрытии
+        /// </summary>
+        /// <typeparam name="TViewModel">Тип ViewModel</typeparam>
+        /// <param name="view">View</param>
+        /// <param name="viewModel">ViewModel</param>
+        /// <param name="onDialogClose">Действие при закрытии диалогового окна</param>
+        /// <param name="dialogType">Тип диалога</param>
+        public void ShowDialog<TViewModel>(IModalWindow view, TViewModel viewModel, Action<TViewModel> onDialogClose, DialogType dialogType = DialogType.None)
         {
-            view.DataContext = viewModel;
+            view.Data = viewModel;
 
             if (onDialogClose != null)
             {
-                view.Closed += (s, e) => onDialogClose(viewModel);
+                view.OnClose += (s, e) => onDialogClose(viewModel);
             }
 
-            view.Show();
+            switch (dialogType)
+            {
+                case DialogType.None:
+                    break;
+                case DialogType.Notify:
+                    SystemSounds.Asterisk.Play();
+                    break;
+                case DialogType.Error:
+                    SystemSounds.Hand.Play();
+                    break;
+                default:
+                    goto case DialogType.None;
+            }
+
+            view.ShowView();
         }
 
-        public void ShowDialog<TDialogVM>(IModalWindow view, TDialogVM viewModel)
+        /// <summary>
+        /// Вызов диалогового окна
+        /// </summary>
+        /// <typeparam name="TDialogVM">Тип ViewModel</typeparam>
+        /// <param name="view">View</param>
+        /// <param name="viewModel">Model</param>
+        /// <param name="dialogType">Тип диалога</param>
+        public void ShowDialog<TDialogVM>(IModalWindow view, TDialogVM viewModel, DialogType dialogType = DialogType.None)
         {
-            this.ShowDialog(view, viewModel, null);
+            ShowDialog(view, viewModel, null, dialogType);
         }
     }
 }

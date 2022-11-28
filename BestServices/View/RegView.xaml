@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:BestServices.ViewModel"
              xmlns:local="clr-namespace:BestServices.View"
+             xmlns:security="clr-namespace:BestServices.Model.Security"
              mc:Ignorable="d" 
              d:DesignHeight="450"
              d:DesignWidth="800">
@@ -84,28 +85,28 @@
                 <TextBox x:Name="Login"
                          Grid.Column="1"
                          Grid.Row="0"
-                         Text="{Binding NewUser.Login}"/>
+                         Text="{Binding NewUser.Login, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <PasswordBox x:Name="Password"
                              Grid.Column="1"
                              Grid.Row="1"
                              Password="Password"
-                             PasswordChanged="Password_PasswordChanged"/>
+                             security:PasswordBoxHelper.SecurePassword="{Binding NewUser.Password, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="FName"
                          Grid.Column="1"
                          Grid.Row="2"
-                         Text="{Binding NewUser.FirstName}"/>
+                         Text="{Binding NewUser.FirstName, UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <TextBox x:Name="LName"
                          Grid.Column="1"
                          Grid.Row="3"
-                         Text="{Binding NewUser.LastName}"/>
+                         Text="{Binding NewUser.LastName, UpdateSourceTrigger=PropertyChanged}"/>
                 
                 <TextBox x:Name="Patronymic"
                          Grid.Column="1"
                          Grid.Row="4"
-                         Text="{Binding NewUser.Patronymic}"/>
+                         Text="{Binding NewUser.Patronymic, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <ComboBox x:Name="Role"
                           Grid.Column="1"
